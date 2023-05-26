@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Button</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        border: 0;
+      }
+
+      .container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      #button {
+        background-color: rgb(240, 240, 240);
+        border: 1px solid rgb(218, 218, 218);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      #button:hover, #button:focus {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Button</h2>
+
+      <button id="button">Click me!</button>
+    </div>
+
+
+  </body>
+
+  <script>
+    const button = document.getElementById('button');
+
+    button.onclick = function(e) {
+      alert("Button clicked!");
+    }
+  </script>
+</html>
