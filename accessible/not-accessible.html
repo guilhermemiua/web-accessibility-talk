@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Loja de Surfe</title>
+    <style>
+      :root {
+        --primary: #005a6a;
+        --white: #fff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        border: 0;
+        font-size: 16px;
+      }
+
+      body {
+        background-color: #FAFAFC;
+      }
+
+      .button {
+        color: var(--white);
+        border-radius: 0.25rem;
+        padding: 0.75rem 1.25rem;
+        background-color: var(--primary);
+        margin-top: 1.25rem;
+        width: 280px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .container {
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+
+      .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0px;
+      }
+
+      .navbar > p {
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      .navbar ul {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .navbar ul li {
+        padding: 10px 0px;
+        margin-left: 10px;
+      }
+
+      .hero img {
+        width: 100%;
+      }
+
+      .section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 0;
+      }
+
+      .section-title {
+        margin-bottom: 1.25rem;
+        font-size: 2.25rem;
+        font-weight: bold;
+      }
+
+      #product > img {
+        width: 100%;
+        max-width: 360px;
+      }
+
+      #newsletter-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 280px;
+      }
+
+      #newsletter-form > #email-label {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0.25rem;
+      }
+
+      #newsletter-form > input {
+        background-color: var(--white);
+        padding: 0.875rem 1.25rem;
+        width: 100%;
+      }
+
+      #faq ul {
+        width: 100%;
+      }
+
+      .accordion {
+        width: 100%;
+        background-color: var(--primary);
+        color: var(--white);
+        padding: 1.5rem;
+        cursor: pointer;
+        border-bottom: 1rem solid var(--white);
+      }
+
+      .accordion-content {
+        display: none;
+        padding: 1.5rem;
+        background-color: var(--white);
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <p>Loja de Surfe</p>
+
+        <ul>
+          <li>
+            <a href="#product">Produto</a>
+          </li>
+
+          <li>
+            <a href="#newsletter">Newsletter</a>
+          </li>
+
+          <li>
+            <a href="#faq">Faq</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero">
+        <img src="./surf.webp"/>
+      </div>
+
+      <div id="product" class="section">
+        <p class="section-title">Compre já essa linda camiseta feita Prá você!</p>
+
+        <img src="./tshirt.webp" />
+
+        <div id="buy-button" class="button">COMPRAR AGORA!</div>
+
+        <audio id="audio">
+          <source src="./obrigado.mp3" type="audio/mpeg">
+        </audio>
+        <!-- ADD AUDIO WHEN CLICKED -> PARABÉNS VC COMPROU UMA CAMISETA PRÁ -->
+      </div>
+
+      <div id="newsletter" class="section">
+        <p class="section-title">Inscreva-se na newsletter e receba notícias de lançamentos!</p>
+
+        <form id="newsletter-form">
+          <p id="email-label">Email</p>
+          <input id="email-input" name="email" />
+
+          <!-- ENVIAR? ENVIAR O QUE? -->
+          <div class="button submit-button">Enviar</div>
+        </form>
+      </div>
+
+      <!-- https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ -->
+      <div id="faq" class="section">
+        <p class="section-title">FAQ</p>
+
+        <ul>
+          <li>
+            <p class="accordion">Tempo de entrega</p>
+            <p class="accordion-content">Em até 10 dias para qualquer região do Brasil.</p>
+          </li>
+
+          <li>
+            <p class="accordion">Reposição</p>
+            <p class="accordion-content">A reposição de produtos é realizada todos os meses no dia 1.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function toggleAccordion() {
+      const accordionContent = this.nextElementSibling
+
+      if (accordionContent.style.display === "block") {
+        accordionContent.style.display = "none"
+      } else {
+        accordionContent.style.display = "block"
+      }
+    }
+
+    const accordions = document.getElementsByClassName('accordion')
+
+    for (let index = 0; index < accordions.length; index += 1) {
+      accordions[index].addEventListener('click', toggleAccordion)
+    }
+
+    function playProductBoughtAudio() {
+      const audioElement = document.getElementById("audio")
+
+      audioElement.play()
+    }
+
+    const buyProductButton = document.getElementById("buy-button")
+
+    buyProductButton.addEventListener('click', playProductBoughtAudio)
+
+    function newsletterSubmit(event) {
+      event.preventDefault();
+
+      const emailInput = document.querySelector('input[name="email"]');
+      const emailValue = emailInput.value;
+
+      if (emailValue.indexOf('@') === -1) {
+        alert('Erro');
+      } else {
+        alert('Inscrito na newsletter da Loja de Surfe!');
+      }
+    }
+
+    const newsletterForm = document.getElementById("newsletter-form")
+
+    newsletterForm.addEventListener('submit', newsletterSubmit)
+  </script>
+</html>
