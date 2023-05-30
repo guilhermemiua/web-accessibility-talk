@@ -1,0 +1,3 @@
+/accessible/* /accessible/accessible.html
+/not-accessible/* /accessible/not-accessible.html
+/fake-button/* /div-as-button/fake-button.html
