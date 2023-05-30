@@ -95,7 +95,7 @@
         width: 280px;
       }
 
-      #newsletter-form > #email-label {
+      #email-label {
         width: 100%;
         text-align: left;
         margin-bottom: 0.25rem;
@@ -105,6 +105,11 @@
         background-color: var(--white);
         padding: 0.875rem 1.25rem;
         width: 100%;
+      }
+
+      #email-error-message {
+        margin-top: 0.25rem;
+        color: crimson;
       }
 
       #faq ul {
@@ -172,6 +177,7 @@
         <form id="newsletter-form">
           <p id="email-label">Email</p>
           <input id="email-input" name="email" />
+          <p id="email-error-message"></p>
 
           <!-- ENVIAR? ENVIAR O QUE? -->
           <div class="button submit-button">Enviar</div>
@@ -228,10 +234,13 @@
       event.preventDefault();
 
       const emailInput = document.querySelector('input[name="email"]');
+      const emailErrorMessage = document.getElementById('email-error-message')
       const emailValue = emailInput.value;
 
       if (emailValue.indexOf('@') === -1) {
-        alert('Erro');
+        emailErrorMessage.textContent = 'Erro'
+
+        return
       } else {
         alert('Inscrito na newsletter da Loja de Surfe!');
       }
