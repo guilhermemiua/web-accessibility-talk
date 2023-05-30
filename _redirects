@@ -1,5 +1,5 @@
-/accessible/* /accessible/accessible.html
-/not-accessible/* /accessible/not-accessible.html
-/fake-button/* /div-as-button/fake-button.html
-/fake-button-accessible/* /div-as-button/fake-button-accessible.html
-/button/* /div-as-button/button.html
+/accessible-surf-store/* /example-1/accessible-surf-store.html
+/not-accessible-surf-store/* /example-1/not-accessible-surf-store.html
+/not-accessible-button/* /example-2/not-accessible-button.html
+/div-accessible-button/* /example-2/div-accessible-button.html
+/accessible-button/* /example-2/accessible-button.html
