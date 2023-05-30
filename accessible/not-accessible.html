@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -122,7 +122,8 @@
         color: var(--white);
         padding: 1.5rem;
         cursor: pointer;
-        border-bottom: 1rem solid var(--white);
+        border-bottom: 1px solid var(--white);
+        border-radius: 0.25rem;
       }
 
       .accordion-content {
@@ -163,12 +164,11 @@
 
         <img src="./tshirt.webp" />
 
-        <div id="buy-button" class="button">COMPRAR AGORA!</div>
+        <div id="buy-button" class="button">Comprar</div>
 
         <audio id="audio">
           <source src="./obrigado.mp3" type="audio/mpeg">
         </audio>
-        <!-- ADD AUDIO WHEN CLICKED -> PARABÉNS VC COMPROU UMA CAMISETA PRÁ -->
       </div>
 
       <div id="newsletter" class="section">
@@ -190,12 +190,12 @@
 
         <ul>
           <li>
-            <p class="accordion">Tempo de entrega</p>
+          <p class="accordion">Qual o tempo de entrega?</p>
             <p class="accordion-content">Em até 10 dias para qualquer região do Brasil.</p>
           </li>
 
           <li>
-            <p class="accordion">Reposição</p>
+            <p class="accordion">Quando é feito a reposição de produtos?</p>
             <p class="accordion-content">A reposição de produtos é realizada todos os meses no dia 1.</p>
           </li>
         </ul>
@@ -220,7 +220,7 @@
       accordions[index].addEventListener('click', toggleAccordion)
     }
 
-    function playProductBoughtAudio() {
+    function buyProduct() {
       const audioElement = document.getElementById("audio")
 
       audioElement.play()
@@ -228,7 +228,7 @@
 
     const buyProductButton = document.getElementById("buy-button")
 
-    buyProductButton.addEventListener('click', playProductBoughtAudio)
+    buyProductButton.addEventListener('click', buyProduct)
 
     function newsletterSubmit(event) {
       event.preventDefault();

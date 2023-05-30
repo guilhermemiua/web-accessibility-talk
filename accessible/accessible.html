@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -122,7 +122,9 @@
         color: var(--white);
         padding: 1.5rem;
         cursor: pointer;
-        border-bottom: 1rem solid var(--white);
+        text-align: left;
+        border-bottom: 1px solid var(--white);
+        border-radius: 0.25rem;
       }
 
       .accordion-content {
@@ -155,48 +157,99 @@
       </div>
 
       <div class="hero">
-        <img src="./surf.webp"/>
+        <!-- Faltando alt -->
+        <img src="./surf.webp" alt="Surfista em Florianópolis" />
       </div>
 
       <div id="product" class="section">
-        <p class="section-title">Compre já essa linda camiseta feita Prá você!</p>
+        <h2 class="section-title">Compre já essa linda camiseta feita Prá você!</h2>
 
-        <img src="./tshirt.webp" />
+        <!-- Faltando alt -->
+        <img
+          src="./tshirt.webp"
+          alt="Camiseta branca com tema de Surfe Snoopy. Preço: sessenta reais."
+        />
 
-        <div id="buy-button" class="button">COMPRAR AGORA!</div>
+        <!-- Trocar por button -->
+        <!-- Adicionar alert() para exibir em texto -->
+        <button id="buy-button" class="button">Comprar</button>
 
         <audio id="audio">
           <source src="./obrigado.mp3" type="audio/mpeg">
         </audio>
-        <!-- ADD AUDIO WHEN CLICKED -> PARABÉNS VC COMPROU UMA CAMISETA PRÁ -->
       </div>
 
       <div id="newsletter" class="section">
-        <p class="section-title">Inscreva-se na newsletter e receba notícias de lançamentos!</p>
+        <h2 class="section-title">Inscreva-se na newsletter e receba notícias de lançamentos!</h2>
 
         <form id="newsletter-form">
-          <p id="email-label">Email</p>
-          <input id="email-input" name="email" />
-          <p id="email-error-message"></p>
+          <!-- Usar label -->
+          <!-- Adicionar "for" -->
+          <label id="email-label" for="email-input">Email</label>
+
+          <!-- Add aria -->
+          <input
+            id="email-input"
+            name="email"
+            required
+            aria-required="true"
+            aria-describedby="email-error-message"
+          />
+          <p
+            id="email-error-message"
+            role="alert"
+          ></p>
 
           <!-- ENVIAR? ENVIAR O QUE? -->
-          <div class="button submit-button">Enviar</div>
+          <!-- Alterar para button -->
+          <button class="button submit-button">Increver na newsletter</button>
         </form>
       </div>
 
-      <!-- https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ -->
+
       <div id="faq" class="section">
-        <p class="section-title">FAQ</p>
+        <h2 class="section-title">FAQ</h2>
 
         <ul>
           <li>
-            <p class="accordion">Tempo de entrega</p>
-            <p class="accordion-content">Em até 10 dias para qualquer região do Brasil.</p>
+            <!-- Alterar para button -->
+            <!-- Adicionar classes ARIA -->
+            <!-- https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ -->
+            <button
+              id="accordion-btn-1"
+              aria-expanded="false"
+              aria-controls="accordion-1"
+              class="accordion"
+            >
+              Qual o tempo de entrega?
+            </button>
+            <p
+              id="accordion-1"
+              role="region"
+              aria-labelledby="accordion-btn-1"
+              class="accordion-content"
+            >
+              Em até 10 dias para qualquer região do Brasil.
+            </p>
           </li>
 
           <li>
-            <p class="accordion">Reposição</p>
-            <p class="accordion-content">A reposição de produtos é realizada todos os meses no dia 1.</p>
+            <button
+              id="accordion-btn-2"
+              aria-expanded="false"
+              aria-controls="accordion-2"
+              class="accordion"
+            >
+             Quando é feito a reposição de produtos?
+            </button>
+            <p
+              id="accordion-1"
+              role="region"
+              aria-labelledby="accordion-btn-1"
+              class="accordion-content"
+            >
+              A reposição de produtos é realizada todos os meses no dia 1.
+            </p>
           </li>
         </ul>
       </div>
@@ -209,8 +262,12 @@
 
       if (accordionContent.style.display === "block") {
         accordionContent.style.display = "none"
+
+        this.setAttribute('aria-expanded', 'false')
       } else {
         accordionContent.style.display = "block"
+
+        this.setAttribute('aria-expanded', 'true')
       }
     }
 
@@ -220,15 +277,17 @@
       accordions[index].addEventListener('click', toggleAccordion)
     }
 
-    function playProductBoughtAudio() {
+    function buyProduct() {
       const audioElement = document.getElementById("audio")
 
       audioElement.play()
+
+      alert('Obrigado pela compra!')
     }
 
     const buyProductButton = document.getElementById("buy-button")
 
-    buyProductButton.addEventListener('click', playProductBoughtAudio)
+    buyProductButton.addEventListener('click', buyProduct)
 
     function newsletterSubmit(event) {
       event.preventDefault();
@@ -238,10 +297,15 @@
       const emailValue = emailInput.value;
 
       if (emailValue.indexOf('@') === -1) {
-        emailErrorMessage.textContent = 'Erro'
+        // Trocar mensagem e aria-invalid
+        emailErrorMessage.textContent = 'Email inválido. Por favor adicione um arroba.'
+        emailInput.setAttribute('aria-invalid', 'true')
 
         return
       } else {
+        emailInput.removeAttribute('aria-invalid')
+        emailErrorMessage.textContent = null
+
         alert('Inscrito na newsletter da Loja de Surfe!');
       }
     }
